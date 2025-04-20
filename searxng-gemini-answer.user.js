@@ -19,7 +19,7 @@
   'use strict';
 
   const log = (...args) => console.log('[SearxGemini]', ...args);
-  const MODEL_NAME = 'gemini-1.5-pro';
+  const MODEL_NAME = 'gemini-2.0-flash';
   const GEMINI_API_URL_BASE = `https://generativelanguage.googleapis.com/v1/models/${MODEL_NAME}:generateContent`;
 
   // 🔐 APIキーの取得・保存
@@ -92,7 +92,7 @@
         body: JSON.stringify({
           contents: [{
             parts: [{
-              text: `以下の検索クエリに対し、簡潔で正確な日本語の回答をHTML形式で出力してください（段落・改行・リンク含む）。また、信頼できる出典URLを必ず1件以上含めてください。ただし、markdownのコードブロック記法（\`\`\`など）や<pre>タグは使用せず、HTML本体だけを返してください。信頼できる情報源のURLも1件以上含めてください。\n\nクエリ：「${query}」`
+              text: `以下の検索クエリに対し、最新の正確な回答をHTML形式で出力してください（段落・改行・リンク含む）。また、信頼できる出典URLを必ず1件以上含めてください。HTML本体だけを返してください。\n\nクエリ：「${query}」`
             }]
           }],
         })
@@ -105,14 +105,19 @@
       }
 
       const data = await response.json();
-      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+      const rawText = data?.candidates?.[0]?.content?.parts?.[0]?.text;
 
-      if (!text) {
+      if (!rawText) {
         contentEl.innerHTML = `Gemini AIの回答を取得できませんでした。`;
         return log('API応答にテキストがありません:', data);
       }
 
-      contentEl.innerHTML = text;
+      // コードブロック記法の除去（文中のものも含めて完全対応）
+      const cleanedText = rawText
+        .replace(/```html\s*/gi, '')
+        .replace(/```/g, '');
+
+      contentEl.innerHTML = cleanedText;
     } catch (err) {
       document.getElementById('gemini-answer-content').innerHTML = `Gemini APIエラー: ${err.message}`;
       log('API呼び出しエラー:', err);
