@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SearXNGにGemini AIの回答を表示 ✨
 // @namespace    https://github.com/koyasi777/searxng-gemini-answer-injector
-// @version      1.0.0
+// @version      2.0.0
 // @description  SearXNG検索結果にGoogle GeminiのAI回答を直接表示！APIキーはローカル保存、スタイリッシュなUIで回答を即確認。
 // @author       koyasi777
 // @match        *://*/searx/search*
