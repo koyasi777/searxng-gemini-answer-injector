@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         SearXNGにGemini AIの回答を表示 ✨
 // @namespace    https://github.com/koyasi777/searxng-gemini-answer-injector
-// @version      2.0.0
+// @version      3.0.0
 // @description  SearXNG検索結果にGoogle GeminiのAI回答を直接表示！APIキーはローカル保存、スタイリッシュなUIで回答を即確認。
 // @author       koyasi777
 // @match        *://*/searx/search*
@@ -82,9 +82,27 @@
 
   resultsDiv.insertBefore(aiBox, resultsDiv.firstChild);
 
+  function getCurrentLanguage() {
+    const raw = document.getElementById("language")?.value?.trim().toLowerCase() || "ja";
+    return (raw === "all" || raw === "auto") ? "ja" : raw;
+  }
 
   async function fetchGeminiAnswer() {
     const contentEl = document.getElementById('gemini-answer-content');
+
+    // ⬇️ 最終言語取得ロジック（auto/all → ja）
+    const currentLang = getCurrentLanguage();
+
+    // ⬇️ プロンプト組み立て（言語指示付き）
+    const prompt = [
+      `以下の検索クエリに対し、最新の正確な回答をHTML形式で出力してください（段落・改行・リンク含む）。`,
+      `また、信頼できる出典URLを必ず1件以上含めてください。HTML本体だけを返してください。`,
+      ``,
+      `クエリ：「${query}」`,
+      ``,
+      `※ 出力の言語は「${currentLang}」にしてください。`
+    ].join('\n');
+
     try {
       const response = await fetch(`${GEMINI_API_URL_BASE}?key=${GEMINI_API_KEY}`, {
         method: 'POST',
@@ -92,7 +110,7 @@
         body: JSON.stringify({
           contents: [{
             parts: [{
-              text: `以下の検索クエリに対し、最新の正確な回答をHTML形式で出力してください（段落・改行・リンク含む）。また、信頼できる出典URLを必ず1件以上含めてください。HTML本体だけを返してください。\n\nクエリ：「${query}」`
+              text: prompt
             }]
           }],
         })
@@ -116,6 +134,7 @@
       const cleanedText = rawText
         .replace(/```html\s*/gi, '')
         .replace(/```/g, '');
+
 
       contentEl.innerHTML = cleanedText;
     } catch (err) {
