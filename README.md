@@ -9,10 +9,6 @@
 - 🌙 ダークモードにも自動対応
 - ⚡ 表示位置は検索結果最上部、自然に溶け込むスタイル
 
-<p>
-  <img src=".github/images/searxng-gemini-answer-preview.png" alt="Searxngに表示されたGemini回答" width="600">
-</p>
-
 ---
 
 ## ⚙️ インストール方法
