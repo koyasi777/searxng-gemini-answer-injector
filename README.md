@@ -27,12 +27,27 @@
 
 ## 💡 主な機能
 
-- `https://*/search*` で動作（Searx向け）
 - クエリ文字列を自動取得し、Geminiに送信
 - GeminiのHTML形式の回答を検索結果上部に追加
 - APIキーはローカルに保存（`localStorage`）
 - APIキーの再入力・変更にも対応
 - CORSやGM_系のgrant不要（`fetch`使用）
+
+---
+
+## 🖼 対応サイト
+
+多数のSearXNGインスタンスに対応するため、`@match` を以下のように広く指定しています：
+
+```js
+// @match        *://*/searx/search*
+// @match        *://*/searxng/search*
+// @match        *://searx.*/*
+// @match        *://*.searx.*/*
+```
+
+⚠️ **ご自身の利用しているSearXNGのドメインによっては、このマッチ条件に含まれない場合があります。**  
+その場合は `.user.js` ファイル内の `@match` 行を手動で修正し、ご自身の環境に合わせてください。
 
 ---
 
