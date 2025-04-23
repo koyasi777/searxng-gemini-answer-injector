@@ -1,8 +1,27 @@
 // ==UserScript==
 // @name         SearXNGにGemini AIの回答を表示 ✨
+// @name:ja      SearXNGにGemini AIの回答を表示 ✨
+// @name:en      Show Gemini AI Answers in SearXNG ✨
+// @name:zh-CN   在SearXNG中显示Gemini AI回答 ✨
+// @name:zh-TW   在SearXNG中顯示Gemini AI回答 ✨
+// @name:ko      SearXNG에서 Gemini AI 답변 표시 ✨
+// @name:fr      Afficher les réponses Gemini AI dans SearXNG ✨
+// @name:es      Mostrar respuestas de Gemini AI en SearXNG ✨
+// @name:de      Gemini-AI-Antworten in SearXNG anzeigen ✨
+// @name:pt-BR   Exibir respostas do Gemini AI no SearXNG ✨
+// @name:ru      Показ ответов Gemini AI в SearXNG ✨
+// @version      3.1.0
+// @description         SearXNG検索結果にGoogle GeminiのAI回答を直接表示！APIキーはローカル保存、スタイリッシュなUIで回答を即確認。
+// @description:en      Display Google Gemini AI answers directly in SearXNG search results! API key stored locally, fast and elegant UI.
+// @description:zh-CN   在SearXNG搜索结果中直接显示Gemini AI的回答！API密钥本地保存，界面美观快速。
+// @description:zh-TW   在SearXNG搜尋結果中直接顯示Gemini AI的回答！API金鑰本地儲存，介面美觀且快速。
+// @description:ko      SearXNG 검색 결과에 Gemini AI 답변을 바로 표시! API 키는 로컬 저장, 세련된 UI로 빠르게 확인 가능.
+// @description:fr      Affiche les réponses Gemini AI dans SearXNG. Clé API stockée localement, interface rapide et élégante.
+// @description:es      Muestra respuestas de Gemini AI directamente en SearXNG. Clave API guardada localmente, interfaz elegante y rápida.
+// @description:de      Zeigt Gemini AI-Antworten direkt in SearXNG an. API-Schlüssel wird lokal gespeichert, stilvolles UI.
+// @description:pt-BR   Exibe respostas do Gemini AI diretamente no SearXNG! Chave API armazenada localmente, interface rápida e estilosa.
+// @description:ru      Отображение ответов Gemini AI прямо в SearXNG! Ключ API хранится локально, стильный и быстрый интерфейс.
 // @namespace    https://github.com/koyasi777/searxng-gemini-answer-injector
-// @version      3.0.0
-// @description  SearXNG検索結果にGoogle GeminiのAI回答を直接表示！APIキーはローカル保存、スタイリッシュなUIで回答を即確認。
 // @author       koyasi777
 // @match        *://*/searx/search*
 // @match        *://*/searxng/search*
