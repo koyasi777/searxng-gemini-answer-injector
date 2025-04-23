@@ -32,6 +32,7 @@
 // @license      MIT
 // @homepageURL  https://github.com/koyasi777/searxng-gemini-answer-injector
 // @supportURL   https://github.com/koyasi777/searxng-gemini-answer-injector/issues
+// @icon         https://docs.searxng.org/_static/searxng-wordmark.svg
 // ==/UserScript==
 
 (async function() {
