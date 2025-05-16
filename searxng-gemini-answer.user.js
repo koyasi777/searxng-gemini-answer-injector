@@ -10,7 +10,7 @@
 // @name:de      Gemini-AI-Antworten in SearXNG anzeigen ✨
 // @name:pt-BR   Exibir respostas do Gemini AI no SearXNG ✨
 // @name:ru      Показ ответов Gemini AI в SearXNG ✨
-// @version      3.3.5
+// @version      3.5.0
 // @description         SearXNG検索結果にGoogle GeminiのAI回答を直接表示！APIキーはローカル保存、スタイリッシュなUIで回答を即確認。
 // @description:en      Display Google Gemini AI answers directly in SearXNG search results! API key stored locally, fast and elegant UI.
 // @description:zh-CN   在SearXNG搜索结果中直接显示Gemini AI的回答！API密钥本地保存，界面美观快速。
@@ -39,6 +39,28 @@
   'use strict';
 
   const log = (...args) => console.log('[SearxGemini]', ...args);
+
+  // 🔽 <details> 自動展開処理（先に実行）
+  function expandDetailsIfExists() {
+    const idsToExpand = ['suggestions', 'engines_msg', 'search_url'];
+    idsToExpand.forEach(id => {
+      const container = document.getElementById(id);
+      if (!container) return;
+      const details = container.querySelector('details');
+      if (details) details.open = true;
+    });
+  }
+
+  // 🔄 MutationObserverを最初に仕掛ける（遅延読み込み対応）
+  const observer = new MutationObserver(() => {
+    expandDetailsIfExists();
+  });
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true
+  });
+  expandDetailsIfExists(); // 初回も実行しておく  
+
   const MODEL_NAME = 'gemini-2.0-flash';
   const GEMINI_API_URL_BASE = `https://generativelanguage.googleapis.com/v1/models/${MODEL_NAME}:generateContent`;
 
