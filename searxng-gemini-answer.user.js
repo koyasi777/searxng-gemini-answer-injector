@@ -10,7 +10,7 @@
 // @name:de      Gemini-AI-Antworten in SearXNG anzeigen ✨
 // @name:pt-BR   Exibir respostas do Gemini AI no SearXNG ✨
 // @name:ru      Показ ответов Gemini AI в SearXNG ✨
-// @version      3.1.0
+// @version      3.2.0
 // @description         SearXNG検索結果にGoogle GeminiのAI回答を直接表示！APIキーはローカル保存、スタイリッシュなUIで回答を即確認。
 // @description:en      Display Google Gemini AI answers directly in SearXNG search results! API key stored locally, fast and elegant UI.
 // @description:zh-CN   在SearXNG搜索结果中直接显示Gemini AI的回答！API密钥本地保存，界面美观快速。
@@ -63,8 +63,10 @@
   const query = document.querySelector('input[name="q"]')?.value?.trim();
   if (!query) return log('クエリ取得失敗');
 
-  const resultsDiv = document.querySelector('#results');
-  if (!resultsDiv) return log('結果DIVが見つかりません');
+  // const resultsDiv = document.querySelector('#results');
+  // if (!resultsDiv) return log('結果DIVが見つかりません');
+  const sidebarDiv = document.querySelector('#sidebar');
+  if (!sidebarDiv) return log('sidebar DIVが見つかりません');
 
   const isDark = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
 
@@ -73,7 +75,7 @@
   aiBox.style.cssText = `
     padding: 1em;
     border-radius: 12px;
-    margin-bottom: 1.2em;
+    margin: 1.2em 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
     line-height: 1.6;
     background: ${isDark() ? '#1e1e1e' : '#ffffff'};
@@ -100,7 +102,8 @@
     </div>
   `;
 
-  resultsDiv.insertBefore(aiBox, resultsDiv.firstChild);
+  // resultsDiv.insertBefore(aiBox, resultsDiv.firstChild);
+  sidebarDiv.appendChild(aiBox);
 
   function getCurrentLanguage() {
     const raw = document.getElementById("language")?.value?.trim().toLowerCase() || "ja";
